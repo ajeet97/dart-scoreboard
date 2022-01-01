@@ -21,23 +21,25 @@ function loadPlayerNames() {
   }
 }
 
+function loadGameOptions() {
+  const opts = { initialScore: 501, swd: false, ewd: true };
+  try {
+    return JSON.parse(localStorage.getItem('gameOptions')) || opts;
+  } catch (e) {
+    return opts;
+  }
+}
+
 export default createStore({
   state: {
     gameController: null,
 
     totalPlayers: loadTotalPlayers(),
     playerNames: loadPlayerNames(),
-
-    gameOptions: {
-      initialScore: 501,
-      swd: false,
-      ewd: true,
-      enableDoublesRule: false,
-    },
+    gameOptions: loadGameOptions(),
+    enableDoublesRule: false,
 
     isGameRunning: false,
-
-    // choose '20×3' vs 'T20'
   },
 
   mutations: {
@@ -52,9 +54,8 @@ export default createStore({
     },
 
     updateGameOptions(state, opts) {
-      state.gameOptions.initialScore = opts.initialScore;
-      state.gameOptions.swd = opts.swd;
-      state.gameOptions.ewd = opts.ewd;
+      state.gameOptions = opts;
+      localStorage.setItem('gameOptions', JSON.stringify(opts));
     },
 
     startGame(state) {
@@ -63,6 +64,7 @@ export default createStore({
       state.gameController = new GameController({
         totalPlayers: state.totalPlayers,
         playerNames: state.playerNames,
+        enableDoublesRule: state.enableDoublesRule,
         ...state.gameOptions,
       });
     },
