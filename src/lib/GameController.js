@@ -39,6 +39,16 @@ class GameController {
     );
   }
 
+  get closestDarts() {
+    const score = this.playerController.remaining;
+    if (score > 180) return '';
+
+    const darts = DartController.getMinimumDartsToFinish(score);
+    if (darts.length > this.dartController.remaining) return '';
+
+    return darts.join(', ');
+  }
+
   async throwDart(dart) {
     if (!this._canThrow) return;
 

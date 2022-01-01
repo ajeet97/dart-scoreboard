@@ -1,7 +1,10 @@
 <template>
   <game-over v-if="gameover"/>
   <div class="container" v-else>
-    <div class="current-player">{{ playerName }}</div>
+    <div style="display: flex; column-gap: 10px">
+      <div class="current-player">{{ playerName }}</div>
+      <div class="closest-darts" v-if="closestDarts">{{closestDarts}}</div>
+    </div>
     <div :class="{undo: true, disabled: disableUndo}" @click="undo">UNDO</div>
     <current-round />
     <score-board />
@@ -31,6 +34,7 @@ export default {
     gameController: (state) => state.gameController,
     disableUndo: (state) => state.gameController.history.length === 0,
     gameover: (state) => state.gameController.gameover,
+    closestDarts: (state) => state.gameController.closestDarts,
   }),
 
   methods: {

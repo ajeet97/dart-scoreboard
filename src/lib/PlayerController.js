@@ -44,6 +44,10 @@ class PlayerController {
     return unranked <= 1;
   }
 
+  get remaining() {
+    return this.remainingScores[this.curr] - this.currRoundScores[this.curr];
+  }
+
   get scores() {
     return this.remainingScores.map((remaining, i) => remaining - this.currRoundScores[i]);
   }
