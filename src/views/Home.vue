@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <div class="logo"><img src="/logo.png" /></div>
     <div class="heading">Dart Scoreboard</div>
     <game-menu />
   </div>
@@ -28,5 +29,15 @@ export default {
   text-align: center;
   font-size: 30px;
   margin-bottom: 20px;
+}
+
+.logo {
+  width: 100%;
+  text-align: center;
+  margin-top: -60px;
+}
+
+.logo img {
+  width: 60px;
 }
 </style>
