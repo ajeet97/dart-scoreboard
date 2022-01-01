@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="logo"><img src="/logo.png" /></div>
+    <div class="logo"><img src="@/assets/logo.png" /></div>
     <div class="heading">Dart Scoreboard</div>
     <game-menu />
   </div>
