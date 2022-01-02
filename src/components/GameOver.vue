@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <div class="heading">Game Over</div>
+    <div class="header">
+      <div class="heading">Game Over</div>
+      <div class="undo" @click="gameController.undo">UNDO</div>
+    </div>
     <div class="rankings">
       <table>
         <tr class="thead">
@@ -30,6 +33,7 @@ export default {
 
   computed: {
     ...mapState({
+      gameController: (state) => state.gameController,
       totalPlayers: (state) => state.gameController.playerController.total,
       names: (state) => state.gameController.playerController.names,
       bestRounds: (state) => state.gameController.playerController.bestRounds,
@@ -81,10 +85,25 @@ export default {
   transform: translate(-50%, -50%);
 }
 
+.header {
+  display: flex;
+  flex-direction: row;
+}
+
 .heading {
-  text-align: center;
   font-size: 30px;
   margin-bottom: 20px;
+}
+
+.undo {
+  margin-left: auto;
+  margin-bottom: 5px;
+  background: white;
+  color: black;
+  padding: 5px 10px;
+  line-height: 26px;
+  cursor: pointer;
+  border-radius: 2px;
 }
 
 table {

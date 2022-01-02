@@ -80,27 +80,13 @@ class GameController {
     this.history.push(state);
   }
 
-  isStateValid(state) {
-    if (!state) return true;
-    const rank = this.playerController.ranks[state.player.curr];
-    return rank === PlayerController.UNRANKED;
-  }
-
-  popHistory() {
-    let state;
-    do {
-      state = this.history.pop();
-    } while (!this.isStateValid(state));
-    return state;
-  }
-
-  // TODO: Undo not working properly when a player has finished the game
   undo() {
-    const state = this.popHistory();
+    const state = this.history.pop();
     if (!state) return;
 
     this.dartController.restoreState(state.dart);
     this.playerController.restoreState(state.player);
+    this.gameover = this.playerController.gameover;
   }
 }
 

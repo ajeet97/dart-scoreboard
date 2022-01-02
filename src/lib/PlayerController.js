@@ -12,8 +12,8 @@ class PlayerController {
     this.bestRounds = Array(this.total).fill().map(() => []);
     this.lastRounds = Array(this.total).fill().map(() => []);
     this.lastRoundFouls = Array(this.total).fill(false);
-
     this.ranks = Array(this.total).fill(PlayerController.UNRANKED);
+
     this._rank = 1;
   }
 
@@ -25,6 +25,8 @@ class PlayerController {
       bestRound: [...this.bestRounds[this.curr]],
       lastRound: [...this.lastRounds[this.curr]],
       lastRoundFouls: this.lastRoundFouls[this.curr],
+      rank: this.ranks[this.curr],
+      _rank: this._rank,
     };
   }
 
@@ -41,6 +43,7 @@ class PlayerController {
       .ranks
       .filter((rank) => rank === PlayerController.UNRANKED)
       .length;
+    console.log('unranked:', unranked);
     return unranked <= 1;
   }
 
@@ -110,6 +113,8 @@ class PlayerController {
     this.bestRounds[this.curr] = state.bestRound;
     this.lastRounds[this.curr] = state.lastRound;
     this.lastRoundFouls[this.curr] = state.lastRoundFouls;
+    this.ranks[this.curr] = state.rank;
+    this._rank = state._rank;
   }
 }
 

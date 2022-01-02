@@ -5,7 +5,7 @@
       <div class="current-player">{{ playerName }}</div>
       <div class="closest-darts" v-if="closestDarts">{{closestDarts}}</div>
     </div>
-    <div :class="{undo: true, disabled: disableUndo}" @click="undo">UNDO</div>
+    <div :class="{undo: true, disabled: disableUndo}" @click="gameController.undo">UNDO</div>
     <current-round />
     <score-board />
     <score-input />
@@ -36,12 +36,6 @@ export default {
     gameover: (state) => state.gameController.gameover,
     closestDarts: (state) => state.gameController.closestDarts,
   }),
-
-  methods: {
-    undo() {
-      this.gameController.undo();
-    },
-  },
 };
 </script>
 
